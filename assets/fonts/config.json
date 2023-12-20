@@ -1,0 +1,100 @@
+{
+  "name": "MyFontIcons",
+  "css_prefix_text": "",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "01f67de2dc0137389f1c3aced6273acd",
+      "css": "icq",
+      "code": 62212,
+      "src": "brandico"
+    },
+    {
+      "uid": "23f1393684ec01aa07fce2d90259262b",
+      "css": "fan",
+      "code": 63587,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "3f841e3054ae72c0638b10d76f35fd70",
+      "css": "airline_seat_recline_extra",
+      "code": 59392,
+      "src": "material"
+    },
+    {
+      "uid": "47e9e56d2b5abe839bcf1e014d643dea",
+      "css": "lock",
+      "code": 59393,
+      "src": "linecons"
+    },
+    {
+      "uid": "a869aa5b1f1d3dadfdf39d9222c6e122",
+      "css": "trending_up",
+      "code": 59394,
+      "src": "material"
+    },
+    {
+      "uid": "1ea8ad6dbe1ae9a73565ad16cf88de19",
+      "css": "location",
+      "code": 59395,
+      "src": "linecons"
+    },
+    {
+      "uid": "7fde84f9b0dff3b64d7ba983adac872c",
+      "css": "car",
+      "code": 61881,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "484b4ad2058d17849f205c4054b6f315",
+      "css": "cog",
+      "code": 59396,
+      "src": "linecons"
+    },
+    {
+      "uid": "50e3766928de027392d54955c492ba86",
+      "css": "more_vert",
+      "code": 59397,
+      "src": "material"
+    },
+    {
+      "uid": "b714be5a812a474811604f700dfc87ce",
+      "css": "left-open",
+      "code": 61447,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "8fd58d4a5faf953b6069ba222e41021e",
+      "css": "stopwatch",
+      "code": 60089,
+      "src": "rpgawesome"
+    },
+    {
+      "uid": "0f6059e468716a93329821bcbf11220d",
+      "css": "snow-heavy",
+      "code": 59398,
+      "src": "meteocons"
+    },
+    {
+      "uid": "ivmsk67zo1yb1tthd3ugi4xnb3get418",
+      "css": "sun",
+      "code": 59399,
+      "src": "typicons"
+    },
+    {
+      "uid": "b356b6fbb59d7eca7c15fdb055f0401f",
+      "css": "wind",
+      "code": 59400,
+      "src": "typicons"
+    },
+    {
+      "uid": "fd8d9ae4422e55d3ca23f55d9cf4b20a",
+      "css": "waves",
+      "code": 59401,
+      "src": "typicons"
+    }
+  ]
+}
