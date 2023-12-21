@@ -27,33 +27,33 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: kcBG,
       ),
-      home: SoundpoolInitializer(),
+      home: const SoundpoolInitializer(),
     );
   }
 }
 
-
 class SoundpoolInitializer extends StatefulWidget {
+  const SoundpoolInitializer({super.key});
+
   @override
   _SoundpoolInitializerState createState() => _SoundpoolInitializerState();
 }
 
 class _SoundpoolInitializerState extends State<SoundpoolInitializer> {
   Soundpool? _pool;
-  SoundpoolOptions _soundpoolOptions = SoundpoolOptions();
+  SoundpoolOptions _soundpoolOptions = const SoundpoolOptions();
 
   @override
   void initState() {
     super.initState();
-      _initPool(_soundpoolOptions);
+    _initPool(_soundpoolOptions);
   }
 
   @override
   Widget build(BuildContext context) {
     if (_pool == null) {
-      return Material(
-        child: Center(
-          child: CircularProgressIndicator()),
+      return const Material(
+        child: Center(child: CircularProgressIndicator()),
       );
     } else {
       return MyHomePage(
@@ -74,33 +74,30 @@ class _SoundpoolInitializerState extends State<SoundpoolInitializer> {
 }
 
 class MyHomePage extends StatefulWidget {
-    final Soundpool pool;
+  final Soundpool pool;
   final ValueSetter<SoundpoolOptions> onOptionsChange;
-  const MyHomePage({super.key,  required this.pool, required this.onOptionsChange});
-
+  const MyHomePage(
+      {super.key, required this.pool, required this.onOptionsChange});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   late Soundpool pool;
 
   int? _alarmSoundStreamId;
 
   Soundpool get _soundpool => widget.pool;
 
-  
   void _loadSounds() {
     _soundId = _loadSound();
   }
 
-   Future<int> _loadSound() async {
+  Future<int> _loadSound() async {
     var asset = await rootBundle.load("sounds/bmw.mp3");
     return await _soundpool.load(asset);
   }
-
 
   @override
   void didUpdateWidget(MyHomePage oldWidget) {
@@ -110,30 +107,26 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-    @override
+  @override
   void initState() {
     super.initState();
     _loadSounds();
   }
 
-
-
-  double _volume = 1.0;
-  double _rate = 1.0;
+  final double _volume = 1.0;
+  final double _rate = 1.0;
   late Future<int> _soundId;
 
-   Future<void> _playSound() async {
-    var _alarmSound = await _soundId;
-    _alarmSoundStreamId = await _soundpool.play(_alarmSound);
+  Future<void> _playSound() async {
+    var alarmSound = await _soundId;
+    _alarmSoundStreamId = await _soundpool.play(alarmSound);
   }
-
 
   Future<void> _stopSound() async {
     if (_alarmSoundStreamId != null) {
       await _soundpool.stop(_alarmSoundStreamId!);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: BackgroundContainer(
         child: Stack(
           children: [
-                        // SmokeEffect(),
+            // SmokeEffect(),
             Positioned(
               left: MediaQuery.of(context).size.width * 0.1,
               child: SizedBox(
@@ -201,13 +194,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children:  [
+                        children: const [
                           Text(
                             "The Concept i4",
                             style: ktHeading2,
@@ -228,7 +221,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
 
-
             Positioned(
               bottom: 40,
               right: 30,
@@ -244,7 +236,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
 
 class MyRoundButton extends StatefulWidget {
   const MyRoundButton({
@@ -270,8 +261,10 @@ class _MyRoundButtonState extends State<MyRoundButton> {
     return GestureDetector(
       onTap: widget.onPressed,
       onTapDown: (details) => [setState(() => isPressed = true)],
-      onTapCancel: () => [setState(() => isPressed = false),widget.onPressedRelese()],
-      onTapUp: (details) => [setState(() => isPressed = false),widget.onPressedRelese()],
+      onTapCancel: () =>
+          [setState(() => isPressed = false), widget.onPressedRelese()],
+      onTapUp: (details) =>
+          [setState(() => isPressed = false), widget.onPressedRelese()],
       child: Stack(
         alignment: Alignment.center,
         children: [
