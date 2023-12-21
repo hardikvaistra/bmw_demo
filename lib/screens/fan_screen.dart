@@ -93,7 +93,7 @@ class FanScreen extends StatelessWidget {
   }
 }
 
-class MyProgressBar extends StatelessWidget {
+class MyProgressBar extends StatefulWidget {
   const MyProgressBar({
     super.key,
     required this.currentSize,
@@ -102,6 +102,19 @@ class MyProgressBar extends StatelessWidget {
 
   final int currentSize;
   final int totalSize;
+
+  @override
+  State<MyProgressBar> createState() => _MyProgressBarState();
+}
+
+class _MyProgressBarState extends State<MyProgressBar> {
+  int currentSize = 1;
+
+  @override
+  void initState() {
+    currentSize = widget.currentSize;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,11 +127,12 @@ class MyProgressBar extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Container(
               height: 10,
-              width: ((currentSize / totalSize) *
+              width: ((currentSize / widget.totalSize) *
                       MediaQuery.of(context).size.width) +
+                  getExtraSpace() +
                   30,
               margin: const EdgeInsets.all(8),
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              // padding: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
                   colors: [kcSecondaryEnd, kcSecondaryStart],
@@ -131,10 +145,20 @@ class MyProgressBar extends StatelessWidget {
             height: 10,
             margin: const EdgeInsets.all(8),
             padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              border: Border.all(color: kcBGGrey),
+              borderRadius: BorderRadius.circular(5),
+            ),
+          ),
+          Container(
+            height: 10,
+            width: MediaQuery.of(context).size.width,
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(
-                totalSize,
+                widget.totalSize,
                 (index) => Text(
                   "${index + 1}",
                   style: const TextStyle(fontSize: 9),
@@ -142,16 +166,40 @@ class MyProgressBar extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Slider(
+                    divisions: widget.totalSize - 1,
+                    value: currentSize.toDouble(),
+                    thumbColor: Colors.transparent,
+                    secondaryActiveColor: Colors.transparent,
+                    activeColor: Colors.transparent,
+                    inactiveColor: Colors.transparent,
+                    min: 0,
+                    max: (widget.totalSize - 1).toDouble(),
+                    onChanged: (value) {
+                      setState(() {
+                        currentSize = value.toInt();
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
           Positioned(
-            left: ((currentSize / totalSize) *
+            left: ((currentSize / widget.totalSize) *
                     MediaQuery.of(context).size.width) +
-                30,
+                getExtraSpace(),
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Container(
-                  width: 40,
-                  height: 40,
+                  width: 45,
+                  height: 45,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
@@ -182,8 +230,7 @@ class MyProgressBar extends StatelessWidget {
                     ],
                   ),
                 ),
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
+                Container(
                   width: 38,
                   height: 38,
                   alignment: Alignment.center,
@@ -203,5 +250,23 @@ class MyProgressBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  num getExtraSpace() {
+    int progress = (currentSize / (widget.totalSize - 1) * 100).toInt();
+
+    switch (progress) {
+      case 0:
+        return 10;
+      case 25:
+        return 15;
+      case 50:
+        return 20;
+      case 75:
+        return 25;
+      case 100:
+      default:
+        return 30;
+    }
   }
 }
