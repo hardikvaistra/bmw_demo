@@ -1,10 +1,6 @@
-import 'package:bmw_demo/constants/my_images.dart';
-import 'package:bmw_demo/constants/my_textstyle.dart';
 import 'package:bmw_demo/screens/start_screen.dart';
-import 'package:bmw_demo/widgets/background_container.dart';
-import 'package:bmw_demo/widgets/my_button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
 import 'constants/my_colors.dart';
@@ -48,14 +44,23 @@ class _SoundpoolInitializerState extends State<SoundpoolInitializer> {
   @override
   void initState() {
     super.initState();
-    _initPool(_soundpoolOptions);
+    if (!kIsWeb) _initPool(_soundpoolOptions);
   }
 
   @override
   Widget build(BuildContext context) {
     if (_pool == null) {
-      return const Material(
-        child: Center(child: CircularProgressIndicator()),
+      return Material(
+        child: Center(
+          child: (kIsWeb)
+              ? TextButton(
+                  child: const Text("Start"),
+                  onPressed: () {
+                    _initPool(_soundpoolOptions);
+                  },
+                )
+              : const CircularProgressIndicator(),
+        ),
       );
     } else {
       return StartPage(

@@ -8,6 +8,7 @@ class MyRoundButton extends StatefulWidget {
     required this.onPressed,
     this.onPressedRelese,
     this.icon,
+    this.iconData,
     this.image,
     this.gradeintColors,
     this.height = 54,
@@ -19,7 +20,8 @@ class MyRoundButton extends StatefulWidget {
   final double height;
   final double width;
   final void Function()? onPressedRelese;
-  final IconData? icon;
+  final Icon? icon;
+  final IconData? iconData;
   final Color? iconColor;
   final Image? image;
   final List<Color>? gradeintColors;
@@ -108,8 +110,11 @@ class _MyRoundButtonState extends State<MyRoundButton> {
       return widget.image!;
     }
     if (widget.icon != null) {
+      return widget.icon!;
+    }
+    if (widget.iconData != null) {
       return Icon(
-        widget.icon,
+        widget.iconData,
         size: 24,
         color: widget.iconColor ?? Colors.grey,
       );

@@ -46,7 +46,9 @@ class _StartPageState extends State<StartPage> {
   }
 
   Future<int> _loadSound() async {
-    var asset = await rootBundle.load("assets/sounds/bmw.mp3");
+    var asset = await rootBundle.load(
+      "assets/sounds/bmw.mp3",
+    );
     return await _soundpool.load(asset);
   }
 
@@ -98,6 +100,7 @@ class _StartPageState extends State<StartPage> {
         onPressedRelese: _stopSound,
         height: 74,
         width: 74,
+        iconColor: Colors.white,
         gradeintColors: const [
           kcSecondaryStart,
           kcSecondaryStart,
@@ -110,7 +113,7 @@ class _StartPageState extends State<StartPage> {
             (route) => false,
           ),
         ),
-        icon: Icons.chevron_right_rounded,
+        iconData: Icons.chevron_right_rounded,
       ),
     );
   }
