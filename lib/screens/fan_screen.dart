@@ -5,6 +5,7 @@ import 'package:bmw_demo/widgets/background_container.dart';
 import 'package:bmw_demo/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
+import '../widgets/my_circular_progress_slider.dart';
 import '../widgets/my_progress_slider.dart';
 import '../widgets/my_switch.dart';
 import 'common_ui.dart';
@@ -21,7 +22,7 @@ class FanScreen extends StatelessWidget {
             children: [
               _topHeadings(context),
               _climateWidget(),
-              const Expanded(child: CircularProgressIndicator()),
+              _buildCenterProgressSlider(),
               const Text("Fan Speed", style: ktBody),
               const MyLinearProgressBar(totalSize: 5, currentSize: 4),
               const Text("Mode", style: ktBody),
@@ -29,6 +30,17 @@ class FanScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Expanded _buildCenterProgressSlider() {
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          MyCircularProgressSlider(size: Size(300, 300)),
+        ],
       ),
     );
   }
