@@ -79,58 +79,7 @@ class _MyLinearProgressBarState extends State<MyLinearProgressBar> {
             left: ((currentSize / widget.totalSize) *
                     MediaQuery.of(context).size.width) +
                 getExtraSpace(),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  width: 45,
-                  height: 45,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white10,
-                        offset: Offset(-4.67, 0),
-                        blurRadius: 60.34,
-                        spreadRadius: 0.4,
-                      ),
-                      BoxShadow(
-                        color: Colors.white30,
-                        offset: Offset(-4.67, -4.67),
-                        blurRadius: 10.34,
-                        spreadRadius: 0.6,
-                      ),
-                      BoxShadow(
-                        color: Colors.black,
-                        offset: Offset(4.67, 4.67),
-                        blurRadius: 5.34,
-                        spreadRadius: 0.6,
-                      ),
-                      BoxShadow(
-                        color: Colors.white30,
-                        blurRadius: 5.34,
-                        spreadRadius: -10.6,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: 38,
-                  height: 38,
-                  alignment: Alignment.center,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [kcBlack, kcBGGrey],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                  ),
-                  child: Text((currentSize + 1).toString()),
-                ),
-              ],
-            ),
+            child: _RoundEmbosedCircle(currentSize: currentSize),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -177,5 +126,70 @@ class _MyLinearProgressBarState extends State<MyLinearProgressBar> {
       default:
         return 30;
     }
+  }
+}
+
+class _RoundEmbosedCircle extends StatelessWidget {
+  const _RoundEmbosedCircle({
+    super.key,
+    required this.currentSize,
+  });
+
+  final int currentSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          width: 45,
+          height: 45,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.black,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.white10,
+                offset: Offset(-4.67, 0),
+                blurRadius: 60.34,
+                spreadRadius: 0.4,
+              ),
+              BoxShadow(
+                color: Colors.white30,
+                offset: Offset(-4.67, -4.67),
+                blurRadius: 10.34,
+                spreadRadius: 0.6,
+              ),
+              BoxShadow(
+                color: Colors.black,
+                offset: Offset(4.67, 4.67),
+                blurRadius: 5.34,
+                spreadRadius: 0.6,
+              ),
+              BoxShadow(
+                color: Colors.white30,
+                blurRadius: 5.34,
+                spreadRadius: -10.6,
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: 38,
+          height: 38,
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [kcBlack, kcBGGrey],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: Text((currentSize + 1).toString()),
+        ),
+      ],
+    );
   }
 }
