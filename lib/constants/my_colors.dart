@@ -1,10 +1,9 @@
 import 'dart:ui';
 
 const kcBGDark = Color(0xFF090808);
-const kcBG = Color(0xff1e1e1e);
-const kcBGGrey = Color(0xff363636);
+const kcBG = Color.fromARGB(255, 16, 15, 15);
+const kcBGGrey = Color.fromARGB(255, 54, 54, 54);
 const kcTransparent = Color(0x00363636);
-
 const kcLabelGrey = Color(0xff4a4a4a);
 const kcLabelGreyLight = Color(0xFF6C6C6C);
 const kcWhite = Color(0xffffffff);

@@ -113,7 +113,10 @@ class _StartPageState extends State<StartPage> {
             (route) => false,
           ),
         ),
-        iconData: Icons.chevron_right_rounded,
+        icon: const Icon(
+          Icons.chevron_right_rounded,
+          size: 34,
+        ),
       ),
     );
   }

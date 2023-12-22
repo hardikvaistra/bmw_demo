@@ -50,7 +50,7 @@ class _MyRoundButtonState extends State<MyRoundButton> {
         alignment: Alignment.center,
         children: [
           AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 100),
             width: widget.height,
             height: widget.width,
             decoration: BoxDecoration(
@@ -86,7 +86,7 @@ class _MyRoundButtonState extends State<MyRoundButton> {
             ),
           ),
           AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 100),
             width: widget.height - 6,
             height: widget.width - 6,
             padding: EdgeInsets.all(widget.width * 0.2),
