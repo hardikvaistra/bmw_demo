@@ -103,6 +103,7 @@ class _MyCircularProgressSliderState extends State<MyCircularProgressSlider> {
       width: widget.size.height * 0.5,
       alignment: Alignment.center,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             "${volume + 1}%",
