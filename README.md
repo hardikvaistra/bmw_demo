@@ -3,7 +3,7 @@
 Guys Checkout this Demo BMW Flutter app Created Just for Fun.
 Inspiration of Design Credit [Dribble : Berken](https://dribbble.com/shots/13793065-BMW-Smart-App-Design/)
 
-![DEMO](https://imgflip.com/gif/8a9z7t)  ![ALT](https://raw.githubusercontent.com/hardikvaistra/bmw_demo/main/assets/images/inspiration.jpg)
+![DEMO](https://raw.githubusercontent.com/hardikvaistra/bmw_demo/main/assets/images/8a9z7t.gif)  ![ALT](https://raw.githubusercontent.com/hardikvaistra/bmw_demo/main/assets/images/inspiration.jpg)
 
 ## About App
 
