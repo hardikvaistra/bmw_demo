@@ -3,7 +3,7 @@
 Guys Checkout this Demo BMW Flutter app Created Just for Fun.
 Inspiration of Design Credit [Dribble : Berken](https://dribbble.com/shots/13793065-BMW-Smart-App-Design/)
 
-![ALT][""]
+![ALT](https://raw.githubusercontent.com/hardikvaistra/bmw_demo/main/assets/images/inspiration.jpg)
 
 ## About App
 
@@ -17,5 +17,5 @@ Custom Shapes are from -[Flutter Shape Maker]("https://fluttershapemaker.com/")
 
 Package Used in this App
 
-1. Flutter Animate -[Flutter Animate]("https://pub.dev/packages/flutter_animate")
-2. SoundPool -[SoundPool]("https://pub.dev/packages/soundpool")
+1. Flutter Animate []("https://pub.dev/packages/flutter_animate")
+2. SoundPool []("https://pub.dev/packages/soundpool")
