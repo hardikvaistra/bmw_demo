@@ -40,9 +40,10 @@ class FanScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text("Volume", style: ktBody),
-          SizedBox(height: 30),
-          MyCircularProgressSlider(size: Size(300, 300)),
+          MyCircularProgressSlider(
+            size: Size(300, 300),
+            label: "Volume",
+          ),
         ],
       ),
     );

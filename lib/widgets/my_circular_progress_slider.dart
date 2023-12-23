@@ -12,9 +12,13 @@ double strokeWidth = 30;
 
 class MyCircularProgressSlider extends StatefulWidget {
   final Size size;
+  final Function(int)? onValueChange;
+  final String label;
   const MyCircularProgressSlider({
     super.key,
-    required this.size,
+    this.size = const Size(300, 300),
+    required this.label,
+    this.onValueChange,
   });
 
   @override
@@ -23,7 +27,7 @@ class MyCircularProgressSlider extends StatefulWidget {
 }
 
 class _MyCircularProgressSliderState extends State<MyCircularProgressSlider> {
-  int volume = 1;
+  int volume = 0;
 
   @override
   void initState() {
@@ -83,7 +87,6 @@ class _MyCircularProgressSliderState extends State<MyCircularProgressSlider> {
     return ProgressArc(
       onAngleChanged: (value) {
         volume = ((value / (pi * 2)) * 100).toInt();
-
         setState(() {});
       },
     );
@@ -99,9 +102,14 @@ class _MyCircularProgressSliderState extends State<MyCircularProgressSlider> {
       height: widget.size.height * 0.5,
       width: widget.size.height * 0.5,
       alignment: Alignment.center,
-      child: Text(
-        "${volume + 1}%",
-        style: ktHeading1.copyWith(fontSize: 42),
+      child: Column(
+        children: [
+          Text(
+            "${volume + 1}%",
+            style: ktHeading1.copyWith(fontSize: 42),
+          ),
+          const Text("Volume", style: ktLabel),
+        ],
       ),
     );
   }
