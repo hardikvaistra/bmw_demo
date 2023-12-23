@@ -1,8 +1,10 @@
 # bmw_demo
 
-Guys Checkout this Demo BMW Flutter app Created Just for Fun.
-![DEMO](https://raw.githubusercontent.com/hardikvaistra/bmw_demo/main/assets/images/8a9z7t.gif) 
+Guys Checkout this Demo BMW Flutter app Created Just for Fun.  [Download APK](https://github.com/hardikvaistra/bmw_demo/blob/main/bmw_demo.apk?raw=true)
+
 ## About App
+![DEMO](https://raw.githubusercontent.com/hardikvaistra/bmw_demo/main/assets/images/8a9z7t.gif) 
+
 
 Well Took me 3&Half days to complete this 3 Screens! it was quite fun doing it! Clean Code and Not Responsive Yet!
 
