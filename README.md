@@ -14,5 +14,5 @@ Linear Slider is Basically Shadows and Jugaad 😉
 Custom Shapes are from -["Flutter Shape Maker"]("https://fluttershapemaker.com/")
 
 Package Used in this App
- -["Flutter Animate"]("https://pub.dev/packages/flutter_animate")
- -["SoundPool"]("https://pub.dev/packages/soundpool")
+Flutter Animate -["Flutter Animate"]("https://pub.dev/packages/flutter_animate")
+SoundPool -["SoundPool"]("https://pub.dev/packages/soundpool")
