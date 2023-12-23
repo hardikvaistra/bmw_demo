@@ -1,10 +1,7 @@
 # bmw_demo
 
 Guys Checkout this Demo BMW Flutter app Created Just for Fun.
-Inspiration of Design Credit [Dribble : Berken](https://dribbble.com/shots/13793065-BMW-Smart-App-Design/)
-
-![DEMO](https://raw.githubusercontent.com/hardikvaistra/bmw_demo/main/assets/images/8a9z7t.gif)  ![ALT](https://raw.githubusercontent.com/hardikvaistra/bmw_demo/main/assets/images/inspiration.jpg)
-
+![DEMO](https://raw.githubusercontent.com/hardikvaistra/bmw_demo/main/assets/images/8a9z7t.gif) 
 ## About App
 
 Well Took me 3&Half days to complete this 3 Screens! it was quite fun doing it! Clean Code and Not Responsive Yet!
@@ -19,3 +16,6 @@ Package Used in this App
 
 1. Flutter Animate []("https://pub.dev/packages/flutter_animate")
 2. SoundPool []("https://pub.dev/packages/soundpool")
+
+Inspiration of Design Credit [Dribble : Berken](https://dribbble.com/shots/13793065-BMW-Smart-App-Design/)
+![ALT](https://raw.githubusercontent.com/hardikvaistra/bmw_demo/main/assets/images/inspiration.jpg)
