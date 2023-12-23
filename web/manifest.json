@@ -1,6 +1,6 @@
 {
-    "name": "bwn_demo",
-    "short_name": "bwn_demo",
+    "name": "bmw_demo",
+    "short_name": "bmw_demo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
