@@ -99,8 +99,10 @@ class _MyCircularProgressSliderState extends State<MyCircularProgressSlider> {
       height: widget.size.height * 0.5,
       width: widget.size.height * 0.5,
       alignment: Alignment.center,
-      child: Text(volume == 0 ? "100" : (volume).toString(),
-          style: ktHeading1.copyWith(fontSize: 55)),
+      child: Text(
+        "${volume + 1}%",
+        style: ktHeading1.copyWith(fontSize: 42),
+      ),
     );
   }
 }

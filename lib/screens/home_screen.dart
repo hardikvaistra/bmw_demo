@@ -1,14 +1,16 @@
-import 'dart:math';
-
 import 'package:bmw_demo/constants/my_images.dart';
 import 'package:bmw_demo/constants/my_textstyle.dart';
 import 'package:bmw_demo/screens/fan_screen.dart';
+import 'package:bmw_demo/utils/sound_pool_singleton.dart';
 import 'package:bmw_demo/widgets/background_container.dart';
+import 'package:bmw_demo/widgets/lable_and_value_widget.dart';
 import 'package:bmw_demo/widgets/my_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../constants/my_colors.dart';
 import '../constants/my_font_icons.dart';
+import '../widgets/my_polygon_button.dart';
 import 'common_ui.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -126,7 +128,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Visibility _buildBWMimage() {
+  Widget _buildBWMimage() {
     return Visibility.maintain(
       visible: true,
       child: Padding(
@@ -136,9 +138,8 @@ class HomeScreen extends StatelessWidget {
           width: 140,
         ),
       ),
-    );
+    ).animate().scale(duration: const Duration(seconds: 1));
   }
-
 
   Positioned _bBMWbutton() {
     return Positioned(
@@ -147,21 +148,7 @@ class HomeScreen extends StatelessWidget {
       right: 0,
       child: Column(
         children: [
-          MyRoundButton(
-            height: 105,
-            width: 105,
-            gradeintColors: const [
-              kcSecondaryStart,
-              kcSecondaryStart,
-              kcSecondaryEnd
-            ],
-            image: Image.asset(
-              kIBMWLogo,
-              height: 40,
-              width: 40,
-            ),
-            onPressed: () {},
-          ),
+          const BMWbutton(),
           const SizedBox(height: 20),
           Text(
             "Start Engine",
@@ -204,111 +191,51 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class MyNewPolygonButton extends StatelessWidget {
-  const MyNewPolygonButton({
+class BMWbutton extends StatefulWidget {
+  const BMWbutton({
     super.key,
-    this.sides = 3,
-    this.isLeft = true,
-    required this.icon,
   });
 
-  final double sides;
-  final IconData icon;
-  final bool isLeft;
-
   @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Transform.rotate(
-          angle: sides == 3 ? -pi / (isLeft ? 2 : 6) : -pi / 1,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                height: 160,
-                width: 160,
-                decoration: ShapeDecoration(
-                  shape: StarBorder.polygon(sides: sides, pointRounding: 0.3),
-                  gradient: const LinearGradient(
-                    colors: [kcBlack, kcBG, kcBlack],
-                  ),
-                  shadows: [
-                    const BoxShadow(
-                      color: Colors.white10,
-                      offset: Offset(-2.67, 2.67),
-                      blurRadius: 6.34,
-                      spreadRadius: 0.4,
-                    ),
-                    BoxShadow(
-                      color: isLeft ? Colors.black38 : Colors.white30,
-                      offset: const Offset(-2.67, -2.67),
-                      blurRadius: 10.34,
-                      spreadRadius: 0.6,
-                    ),
-                    BoxShadow(
-                      color: isLeft ? Colors.white30 : Colors.black38,
-                      offset: const Offset(2.67, 2.67),
-                      blurRadius: 5.34,
-                      spreadRadius: 0.6,
-                    ),
-                  ],
-                ),
-              ),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                width: 150,
-                height: 150,
-                decoration: ShapeDecoration(
-                  shape: StarBorder.polygon(sides: sides, pointRounding: 0.26),
-                  color: kcBGDark,
-                ),
-                child: Container(),
-              ),
-            ],
-          ),
-        ),
-        Transform.translate(
-          offset: Offset(
-              isLeft
-                  ? 15
-                  : sides == 3
-                      ? -10
-                      : -25,
-              0),
-          child: Icon(
-            icon,
-            color: kcSecondaryEnd,
-            size: 30,
-          ),
-        )
-      ],
-    );
-  }
+  State<BMWbutton> createState() => _BMWbuttonState();
 }
 
-class TextValueWidget extends StatelessWidget {
-  const TextValueWidget({
-    super.key,
-    required this.label,
-    required this.value,
-    this.valueTextStyle,
-  });
+class _BMWbuttonState extends State<BMWbutton> {
+  //
+  bool isPlaying = false;
 
-  final String label;
-  final String value;
-  final TextStyle? valueTextStyle;
+  @override
+  void initState() {
+    SoundPoolSingleton.instance
+        .loadSound(soundAsset: "assets/sounds/bmw_long.mp3");
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(label, style: ktLabel),
-        const SizedBox(height: 6),
-        Text(value, style: valueTextStyle ?? ktBody),
+    return MyRoundButton(
+      height: 105,
+      width: 105,
+      gradeintColors: const [
+        kcSecondaryStart,
+        kcSecondaryStart,
+        kcSecondaryEnd
       ],
+      image: Image.asset(
+        kIBMWLogo,
+        height: 40,
+        width: 40,
+      ),
+      onPressed: () {
+        if (isPlaying) {
+          SoundPoolSingleton.instance.stopSound();
+        } else {
+          SoundPoolSingleton.instance.playSound();
+        }
+        setState(() {
+          isPlaying = !isPlaying;
+        });
+      },
     );
   }
 }

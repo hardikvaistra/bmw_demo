@@ -4,6 +4,7 @@ import 'package:bmw_demo/constants/my_textstyle.dart';
 import 'package:bmw_demo/widgets/background_container.dart';
 import 'package:bmw_demo/widgets/my_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'dart:ui' as ui;
 import '../widgets/my_circular_progress_slider.dart';
 import '../widgets/my_progress_slider.dart';
@@ -128,7 +129,9 @@ class FanScreen extends StatelessWidget {
                 MyFontIcons.fan,
                 size: 36,
                 color: kcSecondaryEnd,
-              ),
+              )
+                  .animate(onPlay: (controller) => controller.repeat())
+                  .rotate(duration: const Duration(seconds: 5)),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(

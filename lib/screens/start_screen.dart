@@ -3,65 +3,25 @@ import 'package:bmw_demo/screens/home_screen.dart';
 import 'package:bmw_demo/widgets/background_container.dart';
 import 'package:bmw_demo/widgets/my_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:soundpool/soundpool.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../constants/my_colors.dart';
+import 'dart:ui' as ui;
 import '../constants/my_images.dart';
+import '../utils/sound_pool_singleton.dart';
 
 class StartPage extends StatefulWidget {
-  final Soundpool pool;
-  final ValueSetter<SoundpoolOptions> onOptionsChange;
-  const StartPage(
-      {super.key, required this.pool, required this.onOptionsChange});
+  const StartPage({super.key});
 
   @override
   State<StartPage> createState() => _StartPageState();
 }
 
 class _StartPageState extends State<StartPage> {
-  late Soundpool pool;
-
-  int? _alarmSoundStreamId;
-  late Future<int> _soundId;
-
-  Soundpool get _soundpool => widget.pool;
-
   @override
   void initState() {
+    SoundPoolSingleton.instance.loadSound(soundAsset: "assets/sounds/bmw.mp3");
     super.initState();
-    _loadSounds();
-  }
-
-  @override
-  void didUpdateWidget(StartPage oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.pool != widget.pool) {
-      _loadSounds();
-    }
-  }
-
-  void _loadSounds() {
-    _soundId = _loadSound();
-  }
-
-  Future<int> _loadSound() async {
-    var asset = await rootBundle.load(
-      "assets/sounds/bmw.mp3",
-    );
-    return await _soundpool.load(asset);
-  }
-
-  Future<void> _playSound() async {
-    var alarmSound = await _soundId;
-    _alarmSoundStreamId = await _soundpool.play(alarmSound);
-    await Future.delayed(const Duration(milliseconds: 800));
-  }
-
-  Future<void> _stopSound() async {
-    if (_alarmSoundStreamId != null) {
-      await _soundpool.stop(_alarmSoundStreamId!);
-    }
   }
 
   @override
@@ -72,7 +32,7 @@ class _StartPageState extends State<StartPage> {
         child: Stack(
           children: [
             // SmokeEffect(),
-            _bUIStripV(context),
+
             _bUIStripH(context),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +57,7 @@ class _StartPageState extends State<StartPage> {
       bottom: 40,
       right: 30,
       child: MyRoundButton(
-        onPressedRelese: _stopSound,
+        onPressedRelese: SoundPoolSingleton.instance.stopSound,
         height: 74,
         width: 74,
         iconColor: Colors.white,
@@ -106,13 +66,13 @@ class _StartPageState extends State<StartPage> {
           kcSecondaryStart,
           kcSecondaryEnd
         ],
-        onPressed: () => _playSound().then(
-          (value) => Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
-            (route) => false,
-          ),
-        ),
+        onPressed: () => SoundPoolSingleton.instance.playSound().then(
+              (value) => Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                (route) => false,
+              ),
+            ),
         icon: const Icon(
           Icons.chevron_right_rounded,
           size: 34,
@@ -121,26 +81,13 @@ class _StartPageState extends State<StartPage> {
     );
   }
 
-  Positioned _bUIStripV(BuildContext context) {
-    return Positioned(
-      left: MediaQuery.of(context).size.width * 0.05,
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.6,
-        width: 60,
-        child: CustomPaint(
-          painter: VerticleGradientShapePainter(),
-        ),
-      ),
-    );
-  }
-
   Positioned _bUIStripH(BuildContext context) {
     return Positioned(
-      top: MediaQuery.of(context).size.height * 0.58,
+      top: 0,
       right: 0,
       child: SizedBox(
-        height: 40,
-        width: MediaQuery.of(context).size.width * 0.81,
+        height: MediaQuery.of(context).size.height * 0.7,
+        width: MediaQuery.of(context).size.width,
         child: CustomPaint(
           painter: HorizontalGradientShapePainter(),
         ),
@@ -155,19 +102,25 @@ class _StartPageState extends State<StartPage> {
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 "The Concept i4",
                 style: ktHeading2,
-              ),
-              Text(
+              ).animate().slideX(duration: const Duration(milliseconds: 300)),
+              const Text(
                 "Control The Future",
                 style: ktHeading1,
-              ),
-              Text(
+              ).animate().slideX(
+                    duration: const Duration(milliseconds: 600),
+                    delay: const Duration(milliseconds: 200),
+                  ),
+              const Text(
                 "NOW!",
                 style: ktHeading3,
-              ),
+              ).animate().slideX(
+                    duration: const Duration(milliseconds: 300),
+                    delay: const Duration(milliseconds: 200),
+                  ),
             ],
           ),
         ],
@@ -175,7 +128,7 @@ class _StartPageState extends State<StartPage> {
     );
   }
 
-  Visibility _buildBWMimage() {
+  Widget _buildBWMimage() {
     return Visibility.maintain(
       visible: true,
       child: Padding(
@@ -184,16 +137,25 @@ class _StartPageState extends State<StartPage> {
           kIi4Slide,
         ),
       ),
-    );
+    )
+        .animate()
+        .scaleXY(
+          duration: const Duration(milliseconds: 1200),
+        )
+        .moveX(
+          begin: 300,
+          end: 0,
+          duration: const Duration(milliseconds: 1200),
+        );
   }
 
-  Image _bI4Image() {
+  Widget _bI4Image() {
     return Image.asset(
       kIi4Name,
-    );
+    ).animate().slideY(duration: const Duration(milliseconds: 300));
   }
 
-  RichText _bTopText() {
+  Widget _bTopText() {
     return RichText(
       text: const TextSpan(
         text: "BMW",
@@ -211,58 +173,42 @@ class _StartPageState extends State<StartPage> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class VerticleGradientShapePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    var rect = Offset.zero & size;
-
-    paint.shader = const LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      colors: [
-        kcSecondaryStart,
-        kcSecondaryEnd,
-      ],
-    ).createShader(rect);
-    final path = Path();
-    path.lineTo(10, 0);
-    path.lineTo(size.width + 30, size.height);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, 0);
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+    ).animate().slideY(duration: const Duration(milliseconds: 300));
   }
 }
 
 class HorizontalGradientShapePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    var rect = Offset.zero & size;
+    // Layer 1
 
-    paint.shader = const LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      colors: [
-        kcSecondaryEnd,
-        kcSecondaryStart,
-      ],
-    ).createShader(rect);
-    final path = Path();
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, size.height + 40);
-    path.lineTo(0, size.height - 20);
-    path.lineTo(0, 0);
-    canvas.drawPath(path, paint);
+    Paint paintFill0 = Paint()
+      ..color = const Color.fromARGB(255, 255, 255, 255)
+      ..style = PaintingStyle.fill
+      ..strokeWidth = size.width * 0.00
+      ..strokeCap = StrokeCap.butt
+      ..strokeJoin = StrokeJoin.miter;
+    paintFill0.shader = ui.Gradient.linear(
+        Offset(size.width * 0.01, size.height * 0.50),
+        Offset(size.width * 1.01, size.height * 0.50),
+        [kcSecondaryStart, kcSecondaryEnd],
+        [0.00, 1.00]);
+
+    Path path_0 = Path();
+    path_0.moveTo(size.width * 0.0959000, size.height * -0.0016667);
+    path_0.quadraticBezierTo(size.width * 0.0089500, size.height * 0.5398167,
+        size.width * 0.0640750, size.height * 0.7313667);
+    path_0.quadraticBezierTo(size.width * 0.0678000, size.height * 0.8691667,
+        size.width * 1.0108000, size.height * 1.0008500);
+    path_0.lineTo(size.width * 1.0108000, size.height * 0.7949500);
+    path_0.quadraticBezierTo(size.width * 0.2777000, size.height * 0.7578333,
+        size.width * 0.1908500, size.height * 0.6657667);
+    path_0.quadraticBezierTo(size.width * 0.0748000, size.height * 0.5628167,
+        size.width * 0.1317250, size.height * 0.0010333);
+    path_0.lineTo(size.width * 0.0959000, size.height * -0.0016667);
+    path_0.close();
+
+    canvas.drawPath(path_0, paintFill0);
   }
 
   @override
