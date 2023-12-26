@@ -20,7 +20,7 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   @override
   void initState() {
-    SoundPoolSingleton.instance.loadSound(soundAsset: "assets/sounds/bmw.mp3");
+    SoundPoolSingleton.instance.loadSound(soundAsset: "sounds/bmw.mp3");
     super.initState();
   }
 
@@ -67,10 +67,13 @@ class _StartPageState extends State<StartPage> {
           kcSecondaryEnd
         ],
         onPressed: () => SoundPoolSingleton.instance.playSound().then(
-              (value) => Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
-                (route) => false,
+              (_) => Future.delayed(
+                const Duration(milliseconds: 800),
+                () => Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (_) => const HomeScreen()),
+                  (_) => false,
+                ),
               ),
             ),
         icon: const Icon(

@@ -19,33 +19,31 @@ class FanScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: BackgroundContainer(
-          child: Column(
-            children: [
-              _topHeadings(context),
-              _climateWidget(),
-              _buildCenterProgressSlider(),
-              const Text("Fan Speed", style: ktBody),
-              const MyLinearProgressBar(totalSize: 5, currentSize: 4),
-              const Text("Mode", style: ktBody),
-              _bottomButtons(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _topHeadings(context),
+                _climateWidget(),
+                _buildCenterProgressSlider(context),
+                const Text("Fan Speed", style: ktBody),
+                const MyLinearProgressBar(totalSize: 5, currentSize: 4),
+                const Text("Mode", style: ktBody),
+                _bottomButtons(),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Expanded _buildCenterProgressSlider() {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          MyCircularProgressSlider(
-            size: Size(300, 300),
-            label: "Volume",
-          ),
-        ],
+  MyCircularProgressSlider _buildCenterProgressSlider(BuildContext context) {
+    return MyCircularProgressSlider(
+      size: Size(
+        MediaQuery.of(context).size.height * 0.3,
+        MediaQuery.of(context).size.height * 0.3,
       ),
+      label: "Volume",
     );
   }
 

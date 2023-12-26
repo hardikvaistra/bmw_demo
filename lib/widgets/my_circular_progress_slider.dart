@@ -78,8 +78,8 @@ class _MyCircularProgressSliderState extends State<MyCircularProgressSlider> {
         ],
         border: Border.all(color: kcBGGrey, width: 1),
       ),
-      height: widget.size.height * 0.95,
-      width: widget.size.height * 0.95,
+      height: widget.size.height,
+      width: widget.size.height,
     );
   }
 
@@ -139,7 +139,7 @@ class _ProgressArcState extends State<ProgressArc> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size / 1.2;
-    Size canvasSize = Size(screenSize.width * 0.9, screenSize.width * 0.8);
+    Size canvasSize = Size(screenSize.width * 0.9, screenSize.width * 0.9);
     Offset center = canvasSize.center(Offset.zero);
     Offset knobPos = toPolar(
       center - Offset(strokeWidth * 0.9, strokeWidth * 1.5),
@@ -190,7 +190,7 @@ class ArcPaint extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Offset center = size.center(Offset.zero);
 
-    Rect rect = Rect.fromCircle(center: center, radius: radius - 30);
+    Rect rect = Rect.fromCircle(center: center, radius: radius - 33);
 
     final paint = Paint()
       ..shader = const SweepGradient(

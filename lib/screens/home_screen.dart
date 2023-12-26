@@ -207,7 +207,7 @@ class _BMWbuttonState extends State<BMWbutton> {
   @override
   void initState() {
     SoundPoolSingleton.instance
-        .loadSound(soundAsset: "assets/sounds/bmw_long.mp3");
+        .loadSound(soundAsset: "sounds/bmw_long.mp3");
     super.initState();
   }
 

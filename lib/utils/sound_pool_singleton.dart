@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
@@ -16,14 +17,19 @@ class SoundPoolSingleton {
   }
 
   Future<int> _loadSound(String soundAsset) async {
-    var asset = await rootBundle.load(soundAsset);
-    return await _pool!.load(asset);
+    try {
+      var asset =
+          await rootBundle.load(!kIsWeb ? "assets/$soundAsset" : soundAsset);
+      return await _pool!.load(asset);
+    } catch (e) {
+      print("loadSOund");
+      return -1;
+    }
   }
 
   Future<void> playSound() async {
     var alarmSound = await _soundId;
     _bmwSoundStreamId = await _pool!.play(alarmSound);
-    await Future.delayed(const Duration(milliseconds: 800));
   }
 
   Future<void> stopSound() async {
@@ -36,10 +42,12 @@ class SoundPoolSingleton {
     if (_instance != null) {
       return _instance!;
     } else {
-      _soundpoolOptions = const SoundpoolOptions();
+      _soundpoolOptions =
+          const SoundpoolOptions(streamType: StreamType.notification);
       _pool?.dispose();
       _pool = Soundpool.fromOptions(options: _soundpoolOptions!);
       _instance = SoundPoolSingleton();
+      print('pool updated: $_pool');
       return _instance!;
     }
   }
