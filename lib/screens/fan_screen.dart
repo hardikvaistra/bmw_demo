@@ -1,6 +1,7 @@
 import 'package:bmw_demo/constants/my_colors.dart';
 import 'package:bmw_demo/constants/my_font_icons.dart';
 import 'package:bmw_demo/constants/my_textstyle.dart';
+import 'package:bmw_demo/screens/extra_screen.dart';
 import 'package:bmw_demo/widgets/background_container.dart';
 import 'package:bmw_demo/widgets/my_button.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,9 @@ class FanScreen extends StatelessWidget {
           ),
           MyRoundButton(
             iconData: MyFontIcons.more,
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const MyExtraScreen(),
+            )),
           ),
         ],
       ),
