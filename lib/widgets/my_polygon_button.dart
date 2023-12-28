@@ -49,7 +49,7 @@ class _MyNewPolygonButtonState extends State<MyNewPolygonButton>
           children: [
             Transform.rotate(
               angle:
-                  widget.sides == 3 ? -math.pi / (widget.isLeft ? 2 : 6) : -math.pi / 1,
+                  widget.sides == 3 ? -math.pi / (widget.isLeft ? 2 : 6) : - math.pi / 1,
               child: Stack(
                 alignment: Alignment.center,
                 children: [
